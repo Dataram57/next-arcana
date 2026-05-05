@@ -1,33 +1,34 @@
 <div class="container">
 
-  <!-- Deck -->
-  <div class="deck">
-    <h3>Deck</h3>
-    <button *ngFor="let card of deck"
-            (click)="addCard(card, $event)">
-      {{ card.name }}
-    </button>
-  </div>
-
-  <!-- Canvas -->
-  <div class="canvas">
-    <div *ngFor="let card of cards()"
-         class="card"
-         [style.left.px]="card.x"
-         [style.top.px]="card.y"
-         [style.transform]="'rotate(' + card.rotation + 'deg)'"
-         (pointerdown)="startDrag($event, card)">
-
-      <div class="card-body">
-        {{ card.name }}
-      </div>
-
-      <div class="controls">
-        <button (click)="rotate(card); $event.stopPropagation()">↻</button>
-        <button (click)="remove(card); $event.stopPropagation()">✕</button>
-      </div>
-
+    <!-- Deck -->
+    <div class="deck">
+        <h3>Deck</h3>
+        <button *ngFor="let card of deck" (click)="addCard(card, $event)">
+            {{ card.name }}
+        </button>
     </div>
-  </div>
+
+    <!-- Canvas -->
+    <div class="canvas">
+        <div *ngFor="let card of cards()"
+            class="card"
+            [style.left.px]="card.x"
+            [style.top.px]="card.y"
+            [style.transform]="'rotate(' + card.rotation + 'deg)'"
+            (pointerdown)="startDrag($event, card)"
+        >
+
+            <div class="card-body">
+                
+                <img [src]="card.src">
+            </div>
+
+            <div class="controls">
+                <button (click)="rotate(card); $event.stopPropagation()">↻</button>
+                <button (click)="remove(card); $event.stopPropagation()">✕</button>
+            </div>
+
+        </div>
+    </div>
 
 </div>

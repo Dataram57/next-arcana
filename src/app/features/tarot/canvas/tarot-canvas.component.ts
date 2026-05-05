@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 interface Card {
     id: string;
     name: string;
+    src: string;
 }
 
 interface CardInstance {
     id: string;
     name: string;
+    src: string;
     x: number;
     y: number;
     rotation: number;
@@ -25,10 +27,10 @@ export class TarotCanvasComponent {
 
     // Deck (you can expand this)
     deck: Card[] = [
-        { id: 'fool', name: 'The Fool' },
-        { id: 'magician', name: 'The Magician' },
-        { id: 'high-priestess', name: 'High Priestess' },
-        { id: 'empress', name: 'The Empress' },
+        { id: 'fool', name: 'The Fool', src: "https://gfx.tarot.com/images/site/decks/rider/full_size/0.jpg" },
+        { id: 'magician', name: 'The Magician', src: "https://gfx.tarot.com/images/site/decks/rider/full_size/1.jpg" },
+        { id: 'high-priestess', name: 'High Priestess', src: "https://gfx.tarot.com/images/site/decks/rider/full_size/2.jpg" },
+        { id: 'empress', name: 'The Empress', src: "https://gfx.tarot.com/images/site/decks/rider/full_size/3.jpg" },
     ];
 
     // Cards placed on canvas
@@ -43,6 +45,7 @@ export class TarotCanvasComponent {
             {
                 id: crypto.randomUUID(),
                 name: card.name,
+                src: card.src,
                 x: 50,
                 y: 50,
                 rotation: 0
