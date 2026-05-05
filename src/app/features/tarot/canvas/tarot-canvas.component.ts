@@ -1,11 +1,20 @@
-import { Component, signal } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-interface Card {
+//Definitions
+
+export interface Card {
     id: string;
     name: string;
     src: string;
 }
+
+export interface Deck {
+    name: string;
+    cards: Card[];
+}
+
+//rest
 
 interface CardInstance {
     id: string;
@@ -25,13 +34,7 @@ interface CardInstance {
 })
 export class TarotCanvasComponent {
 
-    // Deck (you can expand this)
-    deck: Card[] = [
-        { id: 'fool', name: 'The Fool', src: "https://gfx.tarot.com/images/site/decks/rider/full_size/0.jpg" },
-        { id: 'magician', name: 'The Magician', src: "https://gfx.tarot.com/images/site/decks/rider/full_size/1.jpg" },
-        { id: 'high-priestess', name: 'High Priestess', src: "https://gfx.tarot.com/images/site/decks/rider/full_size/2.jpg" },
-        { id: 'empress', name: 'The Empress', src: "https://gfx.tarot.com/images/site/decks/rider/full_size/3.jpg" },
-    ];
+    @Input() decks: Deck[] = [];
 
     // Cards placed on canvas
     cards = signal<CardInstance[]>([]);

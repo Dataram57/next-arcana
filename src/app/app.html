@@ -1,8 +1,21 @@
+<!--
 <h1>Track Counters</h1>
 
 <app-counter (countChange)="updateValue(0, $event)"></app-counter>
 <app-counter (countChange)="updateValue(1, $event)"></app-counter>
 <app-counter (countChange)="updateValue(2, $event)"></app-counter>
+-->
 
 
-<app-tarot-canvas></app-tarot-canvas>
+<!--<app-tarot-canvas
+    [decks]="tarotDecks"
+>
+
+</app-tarot-canvas>
+-->
+
+
+<app-tarot-deck
+    [cards]="tarotDecks[0].cards"
+    (selectCard)="onCardSelected($event)">
+</app-tarot-deck>
