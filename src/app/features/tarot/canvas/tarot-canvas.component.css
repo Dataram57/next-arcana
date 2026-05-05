@@ -1,0 +1,63 @@
+.container {
+    display: flex;
+    height: 100vh;
+    font-family: sans-serif;
+}
+
+/* Deck */
+.deck {
+    width: 200px;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+    background: #f7f7f7;
+}
+
+.deck button {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+/* Canvas */
+.canvas {
+    flex: 1;
+    position: relative;
+    background: #2b2b2b;
+    overflow: hidden;
+}
+
+/* Card */
+.card {
+    position: absolute;
+    width: 120px;
+    height: 180px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    cursor: grab;
+    user-select: none;
+}
+
+/* Card content */
+.card-body {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Controls */
+.controls {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.controls button {
+    font-size: 12px;
+    cursor: pointer;
+}

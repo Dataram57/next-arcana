@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { CounterComponent } from './features/counter/counter.component';
+import { TarotCanvasComponent } from './features/tarot/canvas/tarot-canvas.component';
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [CounterComponent],
+    imports: [
+        CounterComponent,
+        TarotCanvasComponent
+    ],
     templateUrl: './app.html'
 })
 export class AppComponent {
