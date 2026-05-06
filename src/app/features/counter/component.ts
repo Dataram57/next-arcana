@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-    selector: 'app-counter',
+    selector: 'counter',
     standalone: true,
-    templateUrl: './counter.html',
-    styleUrls: ['./counter.css']
+    templateUrl: './component.html',
+    styleUrls: ['./component.css']
 })
-export class CounterComponent {
+export class Counter {
     count = 0;
 
     @Output() countChange = new EventEmitter<number>();

@@ -26,13 +26,13 @@ interface CardInstance {
 }
 
 @Component({
-    selector: 'app-tarot-canvas',
+    selector: 'reflection-board',
     standalone: true,
     imports: [CommonModule],
-    templateUrl: './tarot-canvas.component.html',
-    styleUrls: ['./tarot-canvas.component.css']
+    templateUrl: './component.html',
+    styleUrls: ['./component.css']
 })
-export class TarotCanvasComponent {
+export class ReflectionBoard {
 
     @Input() decks: Deck[] = [];
 

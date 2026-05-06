@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CounterComponent } from './features/counter/counter.component';
-import { TarotCanvasComponent } from './features/tarot/canvas/tarot-canvas.component';
+import { Counter } from './features/counter/component';
+import { ReflectionBoard } from './features/tarot/reflection-board/component';
 import { tarotDecks } from './tarot';
 import { DeckSelector } from './features/tarot/deck-selector/component';
 
@@ -8,13 +8,13 @@ import { DeckSelector } from './features/tarot/deck-selector/component';
     selector: 'app-root',
     standalone: true,
     imports: [
-        CounterComponent,
-        TarotCanvasComponent,
+        Counter,
+        ReflectionBoard,
         DeckSelector
     ],
-    templateUrl: './app.html'
+    templateUrl: './component.html'
 })
-export class AppComponent {
+export class App {
     values: number[] = [];
 
     tarotDecks = tarotDecks;
