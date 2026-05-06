@@ -65,14 +65,11 @@ export class ReflectionBoard {
         const target = event.currentTarget as HTMLElement;
         target.setPointerCapture(event.pointerId);
 
-        // 🔥 disable animation during drag
+        //disable old animation
         target.style.transition = 'none';
 
         const startX = event.clientX;
         const startY = event.clientY;
-
-        const oldX = card.x;
-        const oldY = card.y;
 
         let dx = 0;
         let dy = 0;
@@ -81,34 +78,23 @@ export class ReflectionBoard {
             dx = e.clientX - startX;
             dy = e.clientY - startY;
 
-            target.style.transform =
-                `translate3d(${oldX + dx}px, ${oldY + dy}px, 0) rotate(${card.rotation}deg)`;
+            card.rotation = 0;
+            target.style.transform = this.GetTransform(card.x + dx, card.y + dy, card.rotation);
         };
 
         const up = (e: PointerEvent) => {
             target.releasePointerCapture(e.pointerId);
 
-            // 🎯 SNAP TO GRID
-            const finalX = this.snap(oldX + dx, target.clientWidth / 2);
-            const finalY = this.snap(oldY + dy, target.clientHeight / 2);
+            //snap to grid
+            card.x = this.snap(card.x + dx, target.clientWidth / 2);
+            card.y = this.snap(card.y + dy, target.clientHeight / 2);
+            card.rotation = Math.random() * 4 - 2;
 
-            // 🔥 enable smooth animation
+            //enable transition
             target.style.transition = 'transform 250ms cubic-bezier(0.22, 1, 0.36, 1)';
 
             // animate to snapped position
-            target.style.transform =
-                `translate3d(${finalX}px, ${finalY}px, 0) rotate(${card.rotation}deg)`;
-
-            // commit AFTER animation (optional but cleaner)
-            setTimeout(() => {
-                this.cards.update(cards =>
-                    cards.map(c =>
-                        c.id === card.id
-                            ? { ...c, x: finalX, y: finalY }
-                            : c
-                    )
-                );
-            }, 250);
+            target.style.transform = this.GetTransform(card.x, card.y, card.rotation);
 
             window.removeEventListener('pointermove', move);
             window.removeEventListener('pointerup', up);
@@ -118,6 +104,10 @@ export class ReflectionBoard {
         window.addEventListener('pointermove', move);
         window.addEventListener('pointerup', up);
         window.addEventListener('pointercancel', up);
+    }
+
+    GetTransform(x : number, y : number, rotation : number){
+        return `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg)`;
     }
 
     // =========================

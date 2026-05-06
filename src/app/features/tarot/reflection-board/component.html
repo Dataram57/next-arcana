@@ -1,46 +1,44 @@
-<div class="container">
+<!-- Deck -->
+<div class="deck">
+    <h3>Deck</h3>
 
-    <!-- Deck -->
-    <div class="deck">
-        <h3>Deck</h3>
+    <div *ngFor="let deck of decks">
+        <button
+            *ngFor="let card of deck.cards"
+            (click)="addCard(card)"
+        >
+            {{ card.name }}
+        </button>
+    </div>
+</div>
 
-        <div *ngFor="let deck of decks">
+
+<div class="board">
+    <div
+        *ngFor="let card of cards()"
+        class="card"
+        [style.transform]="GetTransform(card.x, card.y, card.rotation)"
+        (pointerdown)="startDrag($event, card)"
+    >
+        <div class="background">
+            <img [src]="card.src" />
+        </div>
+
+        <div class="controls">
             <button
-                *ngFor="let card of deck.cards"
-                (click)="addCard(card)"
+                (pointerdown)="$event.stopPropagation()"
+                (click)="rotate(card)"
             >
-                {{ card.name }}
+                ↻
+            </button>
+
+            <button
+                (pointerdown)="$event.stopPropagation()"
+                (click)="remove(card)"
+            >
+                ✕
             </button>
         </div>
     </div>
 
-    <!-- Canvas -->
-    <div class="canvas">
-
-        <div
-            *ngFor="let card of cards()"
-            class="card"
-            [style.transform]="'translate3d(' + card.x + 'px, ' + card.y + 'px, 0)'"
-            (pointerdown)="startDrag($event, card)"
-        >
-            <img [src]="card.src" />
-
-            <div class="controls">
-                <button
-                    (pointerdown)="$event.stopPropagation()"
-                    (click)="rotate(card)"
-                >
-                    ↻
-                </button>
-
-                <button
-                    (pointerdown)="$event.stopPropagation()"
-                    (click)="remove(card)"
-                >
-                    ✕
-                </button>
-            </div>
-        </div>
-
-    </div>
 </div>
