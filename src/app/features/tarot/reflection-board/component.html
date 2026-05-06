@@ -3,8 +3,12 @@
     <!-- Deck -->
     <div class="deck">
         <h3>Deck</h3>
+
         <div *ngFor="let deck of decks">
-            <button *ngFor="let card of deck.cards" (click)="addCard(card, $event)">
+            <button
+                *ngFor="let card of deck.cards"
+                (click)="addCard(card)"
+            >
                 {{ card.name }}
             </button>
         </div>
@@ -12,25 +16,31 @@
 
     <!-- Canvas -->
     <div class="canvas">
-        <div *ngFor="let card of cards()"
+
+        <div
+            *ngFor="let card of cards()"
             class="card"
-            [style.left.px]="card.x"
-            [style.top.px]="card.y"
-            [style.transform]="'rotate(' + card.rotation + 'deg)'"
+            [style.transform]="'translate3d(' + card.x + 'px, ' + card.y + 'px, 0)'"
             (pointerdown)="startDrag($event, card)"
         >
-
-            <div class="card-body">
-                
-                <img [src]="card.src">
-            </div>
+            <img [src]="card.src" />
 
             <div class="controls">
-                <button (click)="rotate(card); $event.stopPropagation()">↻</button>
-                <button (click)="remove(card); $event.stopPropagation()">✕</button>
+                <button
+                    (pointerdown)="$event.stopPropagation()"
+                    (click)="rotate(card)"
+                >
+                    ↻
+                </button>
+
+                <button
+                    (pointerdown)="$event.stopPropagation()"
+                    (click)="remove(card)"
+                >
+                    ✕
+                </button>
             </div>
-
         </div>
-    </div>
 
+    </div>
 </div>

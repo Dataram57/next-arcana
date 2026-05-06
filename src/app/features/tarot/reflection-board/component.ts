@@ -1,8 +1,7 @@
 import { Component, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-//Definitions
-
+// Definitions
 export interface Card {
     id: string;
     name: string;
@@ -13,8 +12,6 @@ export interface Deck {
     name: string;
     cards: Card[];
 }
-
-//rest
 
 interface CardInstance {
     id: string;
@@ -36,71 +33,109 @@ export class ReflectionBoard {
 
     @Input() decks: Deck[] = [];
 
-    // Cards placed on canvas
     cards = signal<CardInstance[]>([]);
 
-    // --- Add card to canvas ---
-    addCard(card: Card, event: MouseEvent) {
-        const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
-
+    // =========================
+    // Add card
+    addCard(card: Card) {
         this.cards.update(cards => [
             ...cards,
             {
                 id: crypto.randomUUID(),
                 name: card.name,
                 src: card.src,
-                x: 50,
-                y: 50,
+                x: 80,
+                y: 80,
                 rotation: 0
             }
         ]);
     }
 
-    // --- Dragging ---
+    // =========================
+    // Drag
+
+    private snap(value: number, grid: number): number {
+        return Math.round(value / grid) * grid;
+    }
+
+
     startDrag(event: PointerEvent, card: CardInstance) {
         event.preventDefault();
+
+        const target = event.currentTarget as HTMLElement;
+        target.setPointerCapture(event.pointerId);
+
+        // 🔥 disable animation during drag
+        target.style.transition = 'none';
 
         const startX = event.clientX;
         const startY = event.clientY;
 
-        const origX = card.x;
-        const origY = card.y;
+        const oldX = card.x;
+        const oldY = card.y;
+
+        let dx = 0;
+        let dy = 0;
 
         const move = (e: PointerEvent) => {
-            const dx = e.clientX - startX;
-            const dy = e.clientY - startY;
+            dx = e.clientX - startX;
+            dy = e.clientY - startY;
 
-            this.cards.update(cards =>
-                cards.map(c =>
-                    c.id === card.id
-                    ? { ...c, x: origX + dx, y: origY + dy }
-                    : c
-                )
-            );
+            target.style.transform =
+                `translate3d(${oldX + dx}px, ${oldY + dy}px, 0) rotate(${card.rotation}deg)`;
         };
 
-        const up = () => {
+        const up = (e: PointerEvent) => {
+            target.releasePointerCapture(e.pointerId);
+
+            // 🎯 SNAP TO GRID
+            const finalX = this.snap(oldX + dx, target.clientWidth / 2);
+            const finalY = this.snap(oldY + dy, target.clientHeight / 2);
+
+            // 🔥 enable smooth animation
+            target.style.transition = 'transform 250ms cubic-bezier(0.22, 1, 0.36, 1)';
+
+            // animate to snapped position
+            target.style.transform =
+                `translate3d(${finalX}px, ${finalY}px, 0) rotate(${card.rotation}deg)`;
+
+            // commit AFTER animation (optional but cleaner)
+            setTimeout(() => {
+                this.cards.update(cards =>
+                    cards.map(c =>
+                        c.id === card.id
+                            ? { ...c, x: finalX, y: finalY }
+                            : c
+                    )
+                );
+            }, 250);
+
             window.removeEventListener('pointermove', move);
             window.removeEventListener('pointerup', up);
+            window.removeEventListener('pointercancel', up);
         };
 
         window.addEventListener('pointermove', move);
         window.addEventListener('pointerup', up);
+        window.addEventListener('pointercancel', up);
     }
 
-    // --- Rotate card (upright/reversed) ---
+    // =========================
+    // Rotate
     rotate(card: CardInstance) {
         this.cards.update(cards =>
             cards.map(c =>
-            c.id === card.id
-                ? { ...c, rotation: (c.rotation + 180) % 360 }
-                : c
+                c.id === card.id
+                    ? { ...c, rotation: (c.rotation + 180) % 360 }
+                    : c
             )
         );
     }
 
-    // --- Remove card ---
+    // =========================
+    // Remove
     remove(card: CardInstance) {
         this.cards.update(cards => cards.filter(c => c.id !== card.id));
     }
+
 }
