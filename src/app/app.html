@@ -7,15 +7,16 @@
 -->
 
 
-<!--<app-tarot-canvas
+<!--
+<app-tarot-canvas
     [decks]="tarotDecks"
 >
 
 </app-tarot-canvas>
 -->
 
-
-<app-tarot-deck
-    [cards]="tarotDecks[0].cards"
-    (selectCard)="onCardSelected($event)">
-</app-tarot-deck>
+<deck-selector
+    [cards]="tarotDecks[3].cards"
+    (onchange)="onCardChange($event)"
+    (onselect)="onCardSelect($event)"
+/>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CounterComponent } from './features/counter/counter.component';
 import { TarotCanvasComponent } from './features/tarot/canvas/tarot-canvas.component';
 import { tarotDecks } from './tarot';
-import { TarotDeckComponent } from './features/tarot/deck/tarot-deck.component';
+import { DeckSelector } from './features/tarot/deck-selector/component';
 
 @Component({
     selector: 'app-root',
@@ -10,7 +10,7 @@ import { TarotDeckComponent } from './features/tarot/deck/tarot-deck.component';
     imports: [
         CounterComponent,
         TarotCanvasComponent,
-        TarotDeckComponent
+        DeckSelector
     ],
     templateUrl: './app.html'
 })
@@ -24,7 +24,11 @@ export class AppComponent {
         console.log(this.values);
     }
 
-    onCardSelected(card: any) {
+    onCardChange(card: any) {
+        console.log('Changed card to:', card);
+    }
+
+    onCardSelect(card: any) {
         console.log('Selected card:', card);
     }
 }

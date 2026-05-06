@@ -1,0 +1,22 @@
+<div class="deck-container">
+
+    <div class="deck" [attr.data-tick]="animationTick">
+        <div
+            *ngFor="let card of getStackWindow(); trackBy: trackById"
+            class="card"
+            [style.transform]="getTransform(card.offset)"
+            [style.zIndex]="100 - Math.abs(card.offset)"
+        >
+            <img *ngIf="card.src" [src]="card.src" />
+            <div class="fallback" *ngIf="!card.src">{{ card.name }}</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <button class="nav prev-btn" (click)="prev()">‹</button>
+    <button class="nav next-btn" (click)="next()">›</button>
+
+    <!-- Select button -->
+    <button class="select-btn" (click)="selectCurrent()">Select</button>
+
+</div>
