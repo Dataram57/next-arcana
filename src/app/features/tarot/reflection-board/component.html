@@ -31,6 +31,12 @@
             >
                 ↻
             </button>
+            <button
+                (pointerdown)="$event.stopPropagation()"
+                (click)="front(card)"
+            >
+                Top
+            </button>
 
             <button
                 (pointerdown)="$event.stopPropagation()"
