@@ -6,14 +6,21 @@
 <counter (countChange)="updateValue(2, $event)"></counter>
 -->
 
-<img src="https://dataram57.com/avatar.jpg" />
-
 <reflection-board
     [decks]="tarotDecks"
 />
 
+<bottom-menu>
+    <div class="card-panel">
+        <deck 
+            *ngFor="let deck of tarotDecks"
+            [deck]="deck"
+            />
+    </div>
+</bottom-menu>
+
 <!--
-<deck-selector
+<card-selector
     [cards]="tarotDecks[3].cards"
     (onchange)="onCardChange($event)"
     (onselect)="onCardSelect($event)"

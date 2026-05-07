@@ -1,20 +1,20 @@
 import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export interface DeckSelectorCard {
+export interface CardSelectorCard {
     id: string;
     name: string;
     src?: string;
 }
 
 @Component({
-    selector: 'deck-selector',
+    selector: 'card-selector',
     standalone: true,
     imports: [CommonModule],
     templateUrl: './component.html',
     styleUrls: ['./component.css']
 })
-export class DeckSelector {
+export class CardSelector {
 
     //dependencies
     private nextSound : HTMLAudioElement = new Audio('sounds/oxidvideos-taking-playing-card-2-522516.mp3');
@@ -22,7 +22,7 @@ export class DeckSelector {
     private selectSound : HTMLAudioElement = this.nextSound;
 
     //input
-    @Input() cards: DeckSelectorCard[] = [];
+    @Input() cards: CardSelectorCard[] = [];
     
     //output
     @Output() onchange = new EventEmitter<Number>();
@@ -137,7 +137,7 @@ export class DeckSelector {
         return `translate3d(0, ${y}px, 0) scale(${scale}) rotate(${rotate}deg)`;
     }
 
-    trackById(index: number, card: DeckSelectorCard & { offset: number }) {
+    trackById(index: number, card: CardSelectorCard & { offset: number }) {
         return card.id;
     }
 

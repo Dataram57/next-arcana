@@ -1,21 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Counter } from './features/counter/component';
 import { ReflectionBoard } from './features/tarot/reflection-board/component';
 import { tarotDecks } from './tarot';
-import { DeckSelector } from './features/tarot/deck-selector/component';
+import { CardSelector } from './features/tarot/card-selector/component';
+import { BottomMenu } from './features/bottom-menu/component';
+import { Deck } from './features/tarot/deck/component';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     imports: [
+        CommonModule,
         Counter,
         ReflectionBoard,
-        DeckSelector
+        CardSelector,
+        BottomMenu,
+        Deck
     ],
-    templateUrl: './component.html'
+    templateUrl: './component.html',
+    styleUrls : ['./component.css']
 })
 export class App {
     values: number[] = [];
+
+    @ViewChildren(Counter)
+    children! : QueryList<Counter>;
 
     tarotDecks = tarotDecks;
 
@@ -30,5 +40,9 @@ export class App {
 
     onCardSelect(card: any) {
         console.log('Selected card:', card);
+    }
+
+    click(){
+        console.log(this.children);
     }
 }

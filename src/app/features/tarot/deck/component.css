@@ -1,0 +1,14 @@
+img{
+    position: absolute;
+}
+
+img:last-of-type{
+    position: relative;
+}
+
+header{
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    width: 100%;
+}

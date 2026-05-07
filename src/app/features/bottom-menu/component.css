@@ -1,0 +1,48 @@
+.bottom-menu {
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    background: #1f2937;
+    color: white;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+
+    transition: transform 0.3s ease;
+}
+
+.bottom-menu.collapsed {
+    transform: translateY(100%);
+}
+
+.toggle-btn {
+    position: absolute;
+    top: -8rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 4rem;
+    height: 4rem;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #374151;
+    color: white;
+
+    cursor: pointer;
+    font-size: 16px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.menu-body{
+    width: 100%;
+    max-height: 100vh;
+    overflow-y:auto;
+}
