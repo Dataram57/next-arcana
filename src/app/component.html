@@ -1,12 +1,4 @@
 
-
-<!--
-<counter (countChange)="updateValue(0, $event)"></counter>
-<counter (countChange)="updateValue(1, $event)"></counter>
-<counter (countChange)="updateValue(2, $event)"></counter>
--->
-
-
 <popup-screen
     [visible]="isCardSelectOpen"
     title="Welcome"
@@ -16,7 +8,7 @@
         <button (click)="closePopup();">Close</button>
         <card-selector
             [cards]="selectedDeck?.cards ?? []"
-            (onchange)="onCardChange($event)"
+            (onchange)='audioPlayer.play("CardChange")'
             (onselect)="clickSelectCard($event)"
         />
     </div>
@@ -25,6 +17,9 @@
 
 <reflection-board
     [decks]="tarotDecks"
+    (onpick)='audioPlayer.play("CardSelect")'
+    (ondrag)='0'
+    (onput)='audioPlayer.play("CardSelect")'
 />
 
 <bottom-menu>
@@ -38,10 +33,3 @@
     </div>
 </bottom-menu>
 
-<!--
-<card-selector
-    [cards]="tarotDecks[3].cards"
-    (onchange)="onCardChange($event)"
-    (onselect)="onCardSelect($event)"
-/>
--->

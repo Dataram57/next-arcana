@@ -16,11 +16,6 @@ export interface CardSelectorCard {
 })
 export class CardSelector {
 
-    //dependencies
-    private nextSound : HTMLAudioElement = new Audio('sounds/oxidvideos-taking-playing-card-2-522516.mp3');
-    private prevSound : HTMLAudioElement = this.nextSound;
-    private selectSound : HTMLAudioElement = this.nextSound;
-
     //input
     @Input() cards: CardSelectorCard[] = [];
     
@@ -33,23 +28,6 @@ export class CardSelector {
     
     //misc
     Math = Math;
-
-    constructor(){
-        this.nextSound.load();
-        this.prevSound.load();
-        this.selectSound.load();
-    }
-
-
-    //================================================================
-    //#region Sound Player
-
-    private play(sound : HTMLAudioElement) {
-        sound.currentTime = 0; // restart instantly
-        sound.play().catch(() => {});
-    }
-
-    //#endregion
 
     //================================================================
     //#region Field
@@ -92,19 +70,16 @@ export class CardSelector {
         this.animationTick++;
         this.index = this.mod(this.index + 1);
         this.onchange.emit(this.index);
-        this.play(this.nextSound);
     }
 
     prev() {
         this.animationTick++;
         this.index = this.mod(this.index - 1);
         this.onchange.emit(this.index);
-        this.play(this.prevSound);
     }
 
     selectCurrent() {
         this.onselect.emit(this.index);
-        this.play(this.selectSound);
     }
 
     //#endregion

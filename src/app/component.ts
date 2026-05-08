@@ -7,6 +7,7 @@ import { BottomMenu } from './features/bottom-menu/component';
 import { Deck, TarotCard, TarotDeck } from './features/tarot/deck/component';
 import { CommonModule } from '@angular/common';
 import { PopupScreen } from './features/popup-screen/component';
+import { AudioPlayer } from './AudioPlayer';
 
 @Component({
     selector: 'app-root',
@@ -26,27 +27,29 @@ import { PopupScreen } from './features/popup-screen/component';
 export class App {
     values: number[] = [];
 
+    audioPlayer : AudioPlayer = new AudioPlayer;
+
     //@ViewChildren(Counter)
     //children! : QueryList<Counter>;
     
     @ViewChild(ReflectionBoard)
     reflectionBoard! : ReflectionBoard;
 
+    @ViewChild(CardSelector)
+    cardSelector! : CardSelector;
+
     tarotDecks = tarotDecks;
+
+    constructor(){
+        this.audioPlayer.load("CardChange", 'sounds/oxidvideos-taking-playing-card-2-522516.mp3');
+        this.audioPlayer.load("CardSelect", 'sounds/oxidvideos-placing-playing-card-522514.mp3');
+    }
+
 
     updateValue(index: number, value: number) {
         this.values[index] = value;
         console.log(this.values);
     }
-
-    onCardChange(card: any) {
-        console.log('Changed card to:', card);
-    }
-
-    click(){
-        //console.log(this.children);
-    }
-
 
     //Card selection
 
@@ -63,6 +66,7 @@ export class App {
 
     clickDeck(deck : TarotDeck){
         this.selectedDeck = deck;
+        this.cardSelector.index = 0;
         this.openPopup();
     }
 
@@ -71,7 +75,6 @@ export class App {
         const card = this.selectedDeck?.cards?.[cardIndex];
         console.log(card);
         this.reflectionBoard.addCard(card as Card);
+        this.audioPlayer.play("CardSelect");
     }
-
-
 }

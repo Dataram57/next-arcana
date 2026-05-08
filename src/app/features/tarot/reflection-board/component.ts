@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Definitions
@@ -32,8 +32,15 @@ interface CardInstance {
 })
 export class ReflectionBoard {
 
+    //input
     @Input() decks : Deck[] = [];
 
+    //output
+    @Output() onpick = new EventEmitter<number>();
+    @Output() ondrag = new EventEmitter<number>();
+    @Output() onput = new EventEmitter<number>();
+
+    //vars
     cards = signal<CardInstance[]>([]);
 
     // =========================
@@ -67,6 +74,9 @@ export class ReflectionBoard {
         const target = event.currentTarget as HTMLElement;
         target.setPointerCapture(event.pointerId);
 
+        //emit event
+        this.onpick.emit();
+
         //disable old animation
         target.style.transition = 'none';
 
@@ -77,6 +87,9 @@ export class ReflectionBoard {
         let dy = 0;
 
         const move = (e: PointerEvent) => {
+            //emit event
+            this.ondrag.emit();
+
             dx = e.clientX - startX;
             dy = e.clientY - startY;
 
@@ -85,6 +98,10 @@ export class ReflectionBoard {
         };
 
         const up = (e: PointerEvent) => {
+            //emit event
+            this.onput.emit();
+
+
             target.releasePointerCapture(e.pointerId);
 
             //snap to grid
