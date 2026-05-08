@@ -11,6 +11,12 @@ reflection-board{
     justify-content: center;
     width: 100%;
 }
-.card-panel > deck{
+
+.card-panel a {
+    text-decoration: none;
+    color: white;
+}
+
+.card-panel deck{
     padding: 0 3rem;
 }

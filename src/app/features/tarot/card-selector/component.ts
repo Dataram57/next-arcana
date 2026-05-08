@@ -25,8 +25,8 @@ export class CardSelector {
     @Input() cards: CardSelectorCard[] = [];
     
     //output
-    @Output() onchange = new EventEmitter<Number>();
-    @Output() onselect = new EventEmitter<Number>();
+    @Output() onchange = new EventEmitter<number>();
+    @Output() onselect = new EventEmitter<number>();
 
     //variables
     index = 0;

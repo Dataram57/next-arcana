@@ -6,16 +6,35 @@
 <counter (countChange)="updateValue(2, $event)"></counter>
 -->
 
+
+<popup-screen
+    [visible]="isCardSelectOpen"
+    title="Welcome"
+    (close)="closePopup()"
+>
+    <div>
+        <button (click)="closePopup();">Close</button>
+        <card-selector
+            [cards]="selectedDeck?.cards ?? []"
+            (onchange)="onCardChange($event)"
+            (onselect)="clickSelectCard($event)"
+        />
+    </div>
+</popup-screen>
+
+
 <reflection-board
     [decks]="tarotDecks"
 />
 
 <bottom-menu>
     <div class="card-panel">
-        <deck 
-            *ngFor="let deck of tarotDecks"
-            [deck]="deck"
-            />
+        <a *ngFor="let deck of tarotDecks"
+            href=""
+            (click)="clickDeck(deck); $event.preventDefault()"
+        >
+            <deck [deck]="deck"/>
+        </a>
     </div>
 </bottom-menu>
 
