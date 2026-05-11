@@ -1,19 +1,31 @@
+# 🔮 Next Arcana
 
+Describe your situation with tarot cards and predict your future. App made in **Angular** with **Typescript** and **Vercel Serverless API** 
 
-## Application
+## Deployed demos
 
+- App: [next-arcana.vercel.app](https://next-arcana.vercel.app/)
+- API server: [next-arcana.vercel.app/api](https://next-arcana.vercel.app/api)
+- Database: NeonDB database
+
+## Running
+
+### Terminal 1 - API:
 ```sh
-cd app
+# Initialization
+cd api
 npm install
-npm run start
+cd ..
+
+# Vercel Serverless API
+npx vercel dev --listen 3001
 ```
 
-## Server
-
-Server is used to handle AI prompts.
-
+### Terminal 2 - App:
 ```sh
-cd server
+# Initialization
 npm install
-npx vercel dev --yes
+
+# Angular Front-end
+npm run start
 ```
