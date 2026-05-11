@@ -106,9 +106,14 @@ export class ReflectionBoard {
 
             //snap to grid
             const isRotated = (card.rotation / 90) % 2 == 0;
-            card.x = this.snap(card.x + dx, (isRotated ? target.clientWidth : target.clientHeight) / 2);
-            card.y = this.snap(card.y + dy, (isRotated ? target.clientHeight : target.clientWidth) / 2);
+            const cardWidth = Math.min(target.clientWidth, target.clientHeight) / 2;
+            const cardHeight = Math.max(target.clientWidth, target.clientHeight) / 2;
+            console.log(cardWidth, cardHeight);
+
+            card.x = this.snap(card.x + dx, (isRotated ? cardWidth : cardWidth));
+            card.y = this.snap(card.y + dy, (isRotated ? cardHeight : cardHeight));
             card.shiftRotation = Math.random() * 4 - 2;
+            console.log(card);
 
             //enable transition
             target.style.transition = 'transform 250ms cubic-bezier(0.22, 1, 0.36, 1)';
@@ -149,6 +154,11 @@ export class ReflectionBoard {
 
     remove(card: CardInstance) {
         this.cards.update(cards => cards.filter(c => c.id !== card.id));
+    }
+
+    toString(){
+        let txt : string = "";
+        return txt;
     }
 
 }

@@ -44,6 +44,8 @@ Card General
     cursor: grab;
     user-select: none;
 
+    transform-origin:center;
+
     touch-action: none;
     max-width: fit-content;
 

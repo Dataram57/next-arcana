@@ -77,4 +77,10 @@ export class App {
         this.reflectionBoard.addCard(card as Card);
         this.audioPlayer.play("CardSelect");
     }
+
+
+    //predict future
+    predictFuture(){
+        console.log(this.reflectionBoard.toString());
+    }
 }
