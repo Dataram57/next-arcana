@@ -1,5 +1,5 @@
 
-import { applyCors } from "./_lib/cors.ts";
+import { applyCors } from "./_lib/cors.js";
 
 export default function handler(req : any, res : any) {
     //================================
