@@ -56,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my-app:build:production"
+              "buildTarget": "next-arcana:build:production"
             },
             "development": {
-              "buildTarget": "my-app:build:development"
+              "buildTarget": "next-arcana:build:development"
             }
           },
           "defaultConfiguration": "development"
