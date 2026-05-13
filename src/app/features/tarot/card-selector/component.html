@@ -1,22 +1,42 @@
 <div class="deck-container">
 
-    <div class="deck" [attr.data-tick]="animationTick">
-        <div
-            *ngFor="let card of getStackWindow(); trackBy: trackById"
-            class="card"
-            [style.transform]="getTransform(card.offset)"
-            [style.zIndex]="100 - Math.abs(card.offset)"
-        >
-            <img *ngIf="card.src" [src]="card.src" />
-            <div class="fallback" *ngIf="!card.src">{{ card.name }}</div>
+    <div class="panel-top">
+
+        <!-- Navigation -->
+        <button class="nav" (click)="prev()">‹</button>
+
+        <!-- Cards -->
+        <div class="deck" [attr.data-tick]="animationTick">
+            <!-- Graphics -->
+            <div
+                *ngFor="let card of getStackWindow(); trackBy: trackById"
+                class="card"
+                [style.transform]="getTransform(card.offset)"
+                [style.zIndex]="100 - Math.abs(card.offset)"
+            >
+                <img *ngIf="card.src" [src]="card.src" />
+            </div>
+            
+            <!-- Size expander -->
+            <img 
+                [src]="cards[index].src"
+                [style.opacity]="'0'"
+            />
         </div>
+
+        <!-- Navigation -->
+        <button class="nav" (click)="next()">›</button>
     </div>
 
-    <!-- Navigation -->
-    <button class="nav prev-btn" (click)="prev()">‹</button>
-    <button class="nav next-btn" (click)="next()">›</button>
+    <div class="panel-bottom">
+        <!-- Navigation -->
+        <button class="nav" (click)="prev()">‹</button>
 
-    <!-- Select button -->
-    <button class="select-btn" (click)="selectCurrent()">Select</button>
+        <!-- Select button -->
+        <button class="select-btn" (click)="selectCurrent()">Select</button>
+
+        <!-- Navigation -->
+        <button class="nav" (click)="next()">›</button>
+    </div>
 
 </div>
