@@ -228,7 +228,7 @@ Magic Button
     transition: all 0.25s ease;
 }
 
-.magic-button-button:hover {
+.magic-button:hover {
     transform: translateY(-2px) scale(1.05);
     box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }

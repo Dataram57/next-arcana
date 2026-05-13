@@ -1,4 +1,4 @@
-import { Component, Query, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Query, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Counter } from './features/counter/component';
 import { Card, ReflectionBoard } from './features/tarot/reflection-board/component';
 import { tarotDecks } from './tarot';
@@ -8,6 +8,7 @@ import { Deck, TarotCard, TarotDeck } from './features/tarot/deck/component';
 import { CommonModule } from '@angular/common';
 import { PopupScreen } from './features/popup-screen/component';
 import { AudioPlayer } from './AudioPlayer';
+import { API_Ask } from './api';
 
 @Component({
     selector: 'app-root',
@@ -37,6 +38,8 @@ export class App {
 
     @ViewChild(CardSelector)
     cardSelector! : CardSelector;
+
+    @ViewChild('additionalContext') additionalContext!: ElementRef;
 
     tarotDecks = tarotDecks;
 
@@ -83,5 +86,12 @@ export class App {
     clickPredict(){
         this.isSetContextOpen = false;
         this.isPredictionOpen = true;
+
+        API_Ask("", (this.additionalContext.nativeElement as HTMLTextAreaElement).value).then(response =>{
+            console.log(response);
+        })
+        .catch(error => {
+            console.error(error);
+        });
     }
 }
