@@ -1,16 +1,93 @@
 
 <popup-screen
     [visible]="isCardSelectOpen"
-    title="Welcome"
-    (close)="closePopup()"
+    title="Select Card"
+    (close)="isCardSelectOpen = false;"
 >
-    <div>
-        <button class="popup-close-button" (click)="closePopup();">Close</button>
-        <card-selector
-            [cards]="selectedDeck?.cards ?? []"
-            (onchange)='audioPlayer.play("CardChange")'
-            (onselect)="clickSelectCard($event)"
-        />
+    <div class="popup-content">
+        <div class="popup-screen-nav">
+            <button class="popup-close-button" (click)="isCardSelectOpen = false;">Close</button>
+        </div>
+        <div class="popup-screen-cards">
+            <card-selector
+                [cards]="selectedDeck?.cards ?? []"
+                (onchange)='audioPlayer.play("CardSwipe")'
+                (onselect)="clickSelectCard($event)"
+            />
+        </div>
+    </div>
+</popup-screen>
+
+<popup-screen
+    [visible]="isIntroductionOpen"
+    title="Tutorial"
+    (close)="isIntroductionOpen = false;"
+>
+    <div class="popup-content">
+        <div class="popup-screen-introduction">
+
+            <header>🔮 Next Arcana</header>
+
+            <p>
+                Welcome to <strong>Next Arcana</strong> — a reflective tool that helps you explore possible futures through honest self-reflection, the symbolic cycles of tarot, and a touch of AI interpretation.
+            </p>
+
+            <header>How does it work?</header>
+
+            <ol>
+
+                <li>
+                    <header>Choose what you want to reflect on</header>
+
+                    <p>
+                        Think about a person, situation, emotion, relationship, project, or any state of mind you want to understand better.
+                    </p>
+
+                    <p>
+                        Example: “I just came back from work, and I still can't mentally disconnect from it.”
+                    </p>
+                </li>
+
+                <li>
+                    <header>Describe that state using tarot cards</header>
+
+                    <p>
+                        Select cards that symbolically represent your current feelings, thoughts, or situation.
+                    </p>
+
+                    <p>
+                        Example: “I feel emotionally detached from others. My only focus was delivering the best possible product. I still can't stop thinking about the project.”
+                    </p>
+
+                    <img src="./images/tutorial_1.png" />
+                </li>
+
+                <li>
+                    <header>Provide additional context</header>
+
+                    <p>
+                        Press the <strong>Predict</strong> button and describe the circumstances surrounding your reflection.
+                    </p>
+
+                    <p>
+                        Example: “I had a presentation for my school project, and I feel like my work stood out from everyone else's.”
+                    </p>
+                </li>
+
+                <li>
+                    <header>Receive your Arcana</header>
+
+                    <p>
+                        The AI will interpret your symbolic choices and generate a reflective prediction — not as absolute truth, but as a mirror for possibility, emotion, and direction.
+                    </p>
+                </li>
+
+            </ol>
+
+        </div>
+        <div class="popup-screen-nav">
+            <button class="popup-close-button" (click)="isIntroductionOpen = false;">Close</button>
+        </div>
     </div>
 </popup-screen>
 
@@ -19,22 +96,32 @@
     [decks]="tarotDecks"
     (onpick)='audioPlayer.play("CardSelect")'
     (ondrag)='0'
-    (onput)='audioPlayer.play("CardSelect")'
+    (onput)='audioPlayer.play("CardPut")'
 />
 
 <bottom-menu>
+    <div class="actions-panel">
+        <button
+            class="button-predict"
+            (click)="isIntroductionOpen = true;"
+        >
+            Introduction
+        </button>
+        <button
+            class="button-predict"
+            (click)="clickPredictFuture();"
+        >
+            Predict Future
+        </button>
+    </div>
     <div class="card-panel">
         <a *ngFor="let deck of tarotDecks"
             href=""
             (click)="clickDeck(deck); $event.preventDefault()"
+            (mouseenter)='audioPlayer.play("CardRoll")'
         >
             <deck [deck]="deck"/>
         </a>
     </div>
-    <button
-        (click)="predictFuture();"
-    >
-        Predict Future
-    </button>
 </bottom-menu>
 

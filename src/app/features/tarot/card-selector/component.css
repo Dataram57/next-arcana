@@ -32,11 +32,10 @@ Navigation Buttons
     height: 3rem;
     border-radius: 50%;
     border: none;
+    flex-shrink: 0;
 
     background: linear-gradient(135deg, #4f46e5, #7c3aed);
     color: white;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 
     font-size: 26px;
     line-height: 46px;
@@ -79,6 +78,9 @@ Deck
 
 .deck{
     padding: 3rem 1rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 /*################################################################

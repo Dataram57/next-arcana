@@ -41,8 +41,10 @@ export class App {
     tarotDecks = tarotDecks;
 
     constructor(){
-        this.audioPlayer.load("CardChange", 'sounds/oxidvideos-taking-playing-card-2-522516.mp3');
+        this.audioPlayer.load("CardSwipe", 'sounds/oxidvideos-taking-playing-card-2-522516.mp3');
         this.audioPlayer.load("CardSelect", 'sounds/oxidvideos-placing-playing-card-522514.mp3');
+        this.audioPlayer.load("CardPut", 'sounds/oxidvideos-placing-playing-card-522514.mp3');
+        this.audioPlayer.load("CardRoll", 'sounds/oxidvideos-taking-playing-card-2-522516.mp3');
     }
 
 
@@ -56,22 +58,14 @@ export class App {
     isCardSelectOpen = false;
     selectedDeck? : TarotDeck;
 
-    openPopup() {
-        this.isCardSelectOpen = true;
-    }
-
-    closePopup() {
-        this.isCardSelectOpen = false;
-    }
-
     clickDeck(deck : TarotDeck){
         this.selectedDeck = deck;
         this.cardSelector.index = 0;
-        this.openPopup();
+        this.isCardSelectOpen = true;
     }
 
     clickSelectCard(cardIndex : number) {
-        this.closePopup();
+        this.isCardSelectOpen = false;
         const card = this.selectedDeck?.cards?.[cardIndex];
         console.log(card);
         this.reflectionBoard.addCard(card as Card);
@@ -80,7 +74,9 @@ export class App {
 
 
     //predict future
-    predictFuture(){
+    clickPredictFuture(){
         console.log(this.reflectionBoard.toString());
     }
+
+    isIntroductionOpen = true;
 }

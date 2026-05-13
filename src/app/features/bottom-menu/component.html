@@ -1,13 +1,18 @@
-<nav
-    class="bottom-menu"
+<div
+    class="container"
     [class.collapsed]="collapsed"
     [style.--collapsed-height.px]="collapsedHeight"
 >
-    <button class="toggle-btn" (click)="toggleMenu()">
-        {{ collapsed ? '▲' : '▼' }}
-    </button>
-
+    <nav>
+        <button 
+        class="toggle-btn"
+        (click)="toggleMenu()"
+    
+        >
+            {{ collapsed ? '▲' : '▼' }}
+        </button>
+    </nav>
     <div class="menu-body">
         <ng-content></ng-content>
     </div>
-</nav>
+</div>

@@ -11,6 +11,51 @@ const screen_sizes_names = ['xs', 'sm', 'md', 'lg', 'xl'];
 */
 
 /*################################################################
+Popup Screen
+*/
+
+.popup-content{
+    overflow-y: auto;
+    max-height: calc(100vh - 8rem);
+}
+
+/*================================
+Nav
+*/
+
+.popup-screen-nav{
+    width: 100%;
+}
+
+/*================================
+Cards
+*/
+
+.popup-screen-cards{
+    width: 100%;
+}
+
+/*================================
+Introduction
+*/
+
+.popup-screen-introduction{
+    color: white;
+    max-width: 768px;
+}
+
+.popup-screen-introduction > header{
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
+}
+
+.popup-screen-introduction li > header{
+    font-size: larger;
+    font-weight: bold;
+}
+
+/*################################################################
 Popup close button
 */
 
@@ -41,16 +86,9 @@ Popup close button
     box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
 
-@media (max-width: 576px) {
-.popup-close-button{
-    position: absolute;
-    z-index: 200;
-}}
-
 /*################################################################
-MISC...
+Reflection Board
 */
-
 
 .reflection-board{
     width: 100%;
@@ -58,15 +96,68 @@ MISC...
     position: absolute;
 }
 
+/*################################################################
+Card Panel
+*/
+
 .card-panel{
+    padding-top: 3rem;
+    display: flex;
+    overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+.card-panel {
     display: inline-flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100%;
-}
+    overflow-x: none;
+}}
 
 .card-panel a {
     text-decoration: none;
     color: white;
     padding: 0 3rem;
+}
+
+/*################################################################
+Actions Panel
+*/
+
+.actions-panel{
+    padding-top: 1rem;
+    display: inline-flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/*################################################################
+Buttons
+*/
+
+.actions-panel button{
+    min-height: 3rem;
+    padding: 0 1rem;
+    margin: 0.5rem 1rem ;
+
+    border-radius: 999px;
+    border: none;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.actions-panel button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }
