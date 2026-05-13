@@ -6,7 +6,7 @@
 >
     <div class="popup-content">
         <div class="popup-screen-nav">
-            <button class="popup-close-button" (click)="isCardSelectOpen = false;">Close</button>
+            <button class="magic-button" (click)="isCardSelectOpen = false;">Close</button>
         </div>
         <div class="popup-screen-cards">
             <card-selector
@@ -86,11 +86,44 @@
 
         </div>
         <div class="popup-screen-nav">
-            <button class="popup-close-button" (click)="isIntroductionOpen = false;">Close</button>
+            <button class="magic-button" (click)="isIntroductionOpen = false;">Close</button>
         </div>
     </div>
 </popup-screen>
 
+<popup-screen
+    [visible]="isSetContextOpen"
+    title="Add Context"
+    (close)="isSetContextOpen = false;"
+>
+    <div class="popup-content">
+        <div class="popup-screen-set_context">
+            <header>Provide Additional Context</header>
+            <textarea
+                id="reflection"
+                rows="6"
+                class="magic-input"
+                placeholder="Describe your thoughts, emotions, symbols, or situation..."
+            ></textarea>
+        </div>
+        <div class="popup-screen-nav">
+            <button class="magic-button" (click)="isSetContextOpen = false;">Close</button>
+            <button class="magic-button" (click)="clickPredict();">Predict</button>
+        </div>
+    </div>
+</popup-screen>
+
+<popup-screen
+    [visible]="isPredictionOpen"
+    title="Prediction"
+    (close)="0;"
+>
+    <div class="popup-content">
+        <div class="popup-screen-prediction">
+            ...
+        </div>
+    </div>
+</popup-screen>
 
 <reflection-board class="reflection-board"
     [decks]="tarotDecks"
@@ -102,14 +135,14 @@
 <bottom-menu>
     <div class="actions-panel">
         <button
-            class="button-predict"
+            class="magic-button"
             (click)="isIntroductionOpen = true;"
         >
             Introduction
         </button>
         <button
-            class="button-predict"
-            (click)="clickPredictFuture();"
+            class="magic-button"
+            (click)="isSetContextOpen = true;"
         >
             Predict Future
         </button>

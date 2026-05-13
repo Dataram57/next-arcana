@@ -40,6 +40,19 @@ export class App {
 
     tarotDecks = tarotDecks;
 
+    //Card selection
+    isCardSelectOpen = false;
+    selectedDeck? : TarotDeck;
+    
+    //introduction
+    isIntroductionOpen = true;
+    
+    //context
+    isSetContextOpen = false;
+
+    //prediction
+    isPredictionOpen = false;
+
     constructor(){
         this.audioPlayer.load("CardSwipe", 'sounds/oxidvideos-taking-playing-card-2-522516.mp3');
         this.audioPlayer.load("CardSelect", 'sounds/oxidvideos-placing-playing-card-522514.mp3');
@@ -52,11 +65,6 @@ export class App {
         this.values[index] = value;
         console.log(this.values);
     }
-
-    //Card selection
-
-    isCardSelectOpen = false;
-    selectedDeck? : TarotDeck;
 
     clickDeck(deck : TarotDeck){
         this.selectedDeck = deck;
@@ -72,11 +80,8 @@ export class App {
         this.audioPlayer.play("CardSelect");
     }
 
-
-    //predict future
-    clickPredictFuture(){
-        console.log(this.reflectionBoard.toString());
+    clickPredict(){
+        this.isSetContextOpen = false;
+        this.isPredictionOpen = true;
     }
-
-    isIntroductionOpen = true;
 }
