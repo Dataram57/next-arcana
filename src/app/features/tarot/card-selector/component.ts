@@ -100,7 +100,7 @@ export class CardSelector {
             offset: i
             });
         }
-        console.log(result);
+        
         return result;
     }
 

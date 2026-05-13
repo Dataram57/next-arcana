@@ -110,6 +110,18 @@ Card
 */
 
 /*################################################################
+header
+*/
+
+header{
+    color:white;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/*################################################################
 Panel - Bottom
 */
 

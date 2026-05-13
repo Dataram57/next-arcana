@@ -1,4 +1,4 @@
-<div class="deck-container">
+<div class="deck-container" *ngIf="cards.length">
 
     <div class="panel-top">
 
@@ -27,6 +27,7 @@
         <!-- Navigation -->
         <button class="nav" (click)="next()">›</button>
     </div>
+    <header>{{ cards[index].name }}</header>
 
     <div class="panel-bottom">
         <!-- Navigation -->

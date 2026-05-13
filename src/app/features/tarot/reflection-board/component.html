@@ -26,20 +26,20 @@
         </div>
 
         <div class="controls">
-            <button
+            <button class="control-button"
                 (pointerdown)="$event.stopPropagation()"
                 (click)="rotate(card)"
             >
                 ↻
             </button>
-            <button
+            <button class="control-button"
                 (pointerdown)="$event.stopPropagation()"
                 (click)="front(card)"
             >
                 Top
             </button>
 
-            <button
+            <button class="control-button"
                 (pointerdown)="$event.stopPropagation()"
                 (click)="remove(card)"
             >

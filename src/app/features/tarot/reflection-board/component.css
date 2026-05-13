@@ -72,7 +72,7 @@ Actions
 .controls {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.666);
 
     display: flex;
     justify-content: center;
@@ -90,6 +90,22 @@ Actions
 }
 
 
-.controls button {
+.control-button{
     pointer-events: auto; /* re-enable ONLY buttons */
+    cursor: pointer;
+
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+    font-weight: bold;
+
+}
+
+.control-button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
 }

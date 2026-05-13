@@ -1,5 +1,58 @@
+/*################################################################
+Topic
+*/
+/*================================
+Details
+*/
+/*
+const screen_sizes = [0, 576, 768, 992, 1200];
+const screen_sizes_names = ['xs', 'sm', 'md', 'lg', 'xl'];
+@media (max-width: Sizepx) {}
+*/
 
-reflection-board{
+/*################################################################
+Popup close button
+*/
+
+.popup-close-button{
+    min-height: 3rem;
+    padding: 0 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    border-radius: 999px;
+    border: none;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white;
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.popup-close-button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 576px) {
+.popup-close-button{
+    position: absolute;
+    z-index: 200;
+}}
+
+/*################################################################
+MISC...
+*/
+
+
+.reflection-board{
     width: 100%;
     height: 100%;
     position: absolute;
@@ -15,8 +68,5 @@ reflection-board{
 .card-panel a {
     text-decoration: none;
     color: white;
-}
-
-.card-panel deck{
     padding: 0 3rem;
 }

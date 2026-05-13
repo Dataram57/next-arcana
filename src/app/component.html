@@ -5,7 +5,7 @@
     (close)="closePopup()"
 >
     <div>
-        <button (click)="closePopup();">Close</button>
+        <button class="popup-close-button" (click)="closePopup();">Close</button>
         <card-selector
             [cards]="selectedDeck?.cards ?? []"
             (onchange)='audioPlayer.play("CardChange")'
@@ -15,7 +15,7 @@
 </popup-screen>
 
 
-<reflection-board
+<reflection-board class="reflection-board"
     [decks]="tarotDecks"
     (onpick)='audioPlayer.play("CardSelect")'
     (ondrag)='0'
