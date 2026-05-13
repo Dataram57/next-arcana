@@ -120,7 +120,8 @@
 >
     <div class="popup-content">
         <div class="popup-screen-prediction">
-            ...
+            <div *ngIf="predictionLoading">Loading...</div>
+            <div *ngIf="!predictionLoading" [innerHTML]="predictionHTML"></div>
         </div>
     </div>
 </popup-screen>

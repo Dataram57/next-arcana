@@ -81,6 +81,13 @@ Set Context
     text-align: center;
 }
 
+/*================================
+Prediction
+*/
+
+.popup-screen-prediction{
+    color: white;
+}
 
 /*################################################################
 Reflection Board

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Query, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Query, QueryList, ViewChild, ViewChildren, ChangeDetectorRef } from '@angular/core';
 import { Counter } from './features/counter/component';
 import { Card, ReflectionBoard } from './features/tarot/reflection-board/component';
 import { tarotDecks } from './tarot';
@@ -9,6 +9,9 @@ import { CommonModule } from '@angular/common';
 import { PopupScreen } from './features/popup-screen/component';
 import { AudioPlayer } from './AudioPlayer';
 import { API_Ask } from './api';
+import { marked } from 'marked';
+import DOMPurify from 'dompurify';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-root',
@@ -56,7 +59,13 @@ export class App {
     //prediction
     isPredictionOpen = false;
 
-    constructor(){
+    predictionHTML : SafeHtml = "";
+    predictionLoading : boolean = false;
+
+    constructor(
+        private sanitizer: DomSanitizer,
+        private cdr: ChangeDetectorRef
+    ){
         this.audioPlayer.load("CardSwipe", 'sounds/oxidvideos-taking-playing-card-2-522516.mp3');
         this.audioPlayer.load("CardSelect", 'sounds/oxidvideos-placing-playing-card-522514.mp3');
         this.audioPlayer.load("CardPut", 'sounds/oxidvideos-placing-playing-card-522514.mp3');
@@ -83,15 +92,21 @@ export class App {
         this.audioPlayer.play("CardSelect");
     }
 
-    clickPredict(){
+    async clickPredict(){
         this.isSetContextOpen = false;
         this.isPredictionOpen = true;
+        this.predictionLoading = true;
+        
+        const response = await API_Ask("", (this.additionalContext.nativeElement as HTMLTextAreaElement).value);
 
-        API_Ask("", (this.additionalContext.nativeElement as HTMLTextAreaElement).value).then(response =>{
-            console.log(response);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+        console.log(response);
+        const html = DOMPurify.sanitize(await marked.parse(response));
+        this.predictionHTML = this.sanitizer.bypassSecurityTrustHtml(html);
+
+        this.predictionLoading = false;
+
+        this.cdr.detectChanges();
+    
+
     }
 }
