@@ -1,15 +1,23 @@
+import { apiURL } from "./config";
+
 interface AskResponse {
     answer: string;
 }
 
-export async function API_Ask(tarotReading: string, context: string): Promise<string> {
-    const res = await fetch('https://next-arcana.vercel.app/api/ask', {
+export async function API_Ask(
+    presentReading: string,
+    futureReading: string,
+    context: string
+): Promise<string> {
+    const res = await fetch(apiURL + '/ask', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-            prompt: context
+        body: JSON.stringify({
+            presentReading: presentReading,
+            futureReading: futureReading,
+            context: context
         }),
     });
 

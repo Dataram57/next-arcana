@@ -101,7 +101,7 @@ export class App {
 
         //ask api
         try{
-            const response = await API_Ask("", (this.additionalContext.nativeElement as HTMLTextAreaElement).value);
+            const response = await API_Ask("", "", (this.additionalContext.nativeElement as HTMLTextAreaElement).value);
 
             console.log(response);
             const html = DOMPurify.sanitize(await marked.parse(response));

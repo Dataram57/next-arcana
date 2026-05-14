@@ -36,7 +36,7 @@ cd ..
 # Please also configure environment variables in `/.env`
 
 # Vercel Serverless API
-npx vercel dev --listen 3001
+npx vercel dev --listen 3000
 ```
 
 ### Terminal 2 - App:
