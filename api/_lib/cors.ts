@@ -11,3 +11,22 @@ export function applyCors(req : any, res : any) : boolean {
 
     return false;
 }
+
+
+export function getClientIp(req: any): string {
+    const xfwd = req.headers["x-forwarded-for"];
+
+    let ip =
+        typeof xfwd === "string"
+        ? xfwd.split(",")[0].trim()
+        : Array.isArray(xfwd)
+            ? xfwd[0]
+            : req.socket.remoteAddress ?? "unknown";
+
+    // normalize IPv6-mapped IPv4 (optional cleanup)
+    if (ip.startsWith("::ffff:")) {
+        ip = ip.slice(7);
+    }
+
+    return ip;
+}
