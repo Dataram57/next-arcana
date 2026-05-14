@@ -59,8 +59,7 @@ export class App {
     //prediction
     isPredictionOpen = false;
 
-    predictionHTML : SafeHtml = "";
-    predictionLoading : boolean = false;
+    predictionHTML? : SafeHtml;
 
     constructor(
         private sanitizer: DomSanitizer,
@@ -95,18 +94,25 @@ export class App {
     async clickPredict(){
         this.isSetContextOpen = false;
         this.isPredictionOpen = true;
-        this.predictionLoading = true;
+        this.predictionHTML = undefined;
         
-        const response = await API_Ask("", (this.additionalContext.nativeElement as HTMLTextAreaElement).value);
-
-        console.log(response);
-        const html = DOMPurify.sanitize(await marked.parse(response));
-        this.predictionHTML = this.sanitizer.bypassSecurityTrustHtml(html);
-
-        this.predictionLoading = false;
-
+        //force update
         this.cdr.detectChanges();
-    
 
+        //ask api
+        try{
+            const response = await API_Ask("", (this.additionalContext.nativeElement as HTMLTextAreaElement).value);
+
+            console.log(response);
+            const html = DOMPurify.sanitize(await marked.parse(response));
+            this.predictionHTML = this.sanitizer.bypassSecurityTrustHtml(html);
+        }
+        catch(err){
+            const html = DOMPurify.sanitize(await marked.parse(err as string));
+            this.predictionHTML = this.sanitizer.bypassSecurityTrustHtml(html);
+        }
+
+        //force update
+        this.cdr.detectChanges();
     }
 }

@@ -87,6 +87,8 @@ Prediction
 
 .popup-screen-prediction{
     color: white;
+    max-width: 768px;
+    font-size: large;
 }
 
 /*################################################################
@@ -103,6 +105,13 @@ Reflection Board
 Card Panel
 */
 
+.card-panel-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .card-panel{
     padding-top: 3rem;
     display: flex;
@@ -110,6 +119,7 @@ Card Panel
     scroll-behavior: smooth;
 }
 
+/*
 @media (max-width: 768px) {
 .card-panel {
     display: inline-flex;
@@ -117,6 +127,7 @@ Card Panel
     justify-content: center;
     overflow-x: none;
 }}
+*/
 
 .card-panel a {
     text-decoration: none;
@@ -137,6 +148,15 @@ Actions Panel
     align-items: center;
 }
 
+/*################################################################
+Predicting Bar
+*/
+
+.predicting-bar{
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
+}
 
 /*################################################################
 Magic input

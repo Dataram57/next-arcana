@@ -120,8 +120,17 @@
 >
     <div class="popup-content">
         <div class="popup-screen-prediction">
-            <div *ngIf="predictionLoading">Loading...</div>
-            <div *ngIf="!predictionLoading" [innerHTML]="predictionHTML"></div>
+            <div 
+                class="predicting-bar"
+                *ngIf="!predictionHTML"
+            >
+                🔮 Predicting...
+                <marquee>✨</marquee>
+            </div>
+            <div *ngIf="predictionHTML" [innerHTML]="predictionHTML"></div>
+        </div>
+        <div class="popup-screen-nav" *ngIf="predictionHTML">
+            <button class="magic-button" (click)="isPredictionOpen = false;">Close</button>
         </div>
     </div>
 </popup-screen>
@@ -148,14 +157,16 @@
             Predict Future
         </button>
     </div>
-    <div class="card-panel">
-        <a *ngFor="let deck of tarotDecks"
-            href=""
-            (click)="clickDeck(deck); $event.preventDefault()"
-            (mouseenter)='audioPlayer.play("CardRoll")'
-        >
-            <deck [deck]="deck"/>
-        </a>
+    <div class="card-panel-container">
+        <div class="card-panel">
+            <a *ngFor="let deck of tarotDecks"
+                href=""
+                (click)="clickDeck(deck); $event.preventDefault()"
+                (mouseenter)='audioPlayer.play("CardRoll")'
+            >
+                <deck [deck]="deck"/>
+            </a>
+        </div>
     </div>
 </bottom-menu>
 

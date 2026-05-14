@@ -1,5 +1,5 @@
-export interface AskResponse {
-  answer: string;
+interface AskResponse {
+    answer: string;
 }
 
 export async function API_Ask(tarotReading: string, context: string): Promise<string> {
