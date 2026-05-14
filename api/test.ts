@@ -1,5 +1,5 @@
-import { applyCors, getClientIp } from './_lib/cors';
-import { RegisterAIQueryRequest } from './_lib/db';
+import { applyCors, getClientIp } from './_lib/cors.js';
+import { RegisterAIQueryRequest } from './_lib/db.js';
 
 export default async function handler(req: any, res: any) {
     //================================
