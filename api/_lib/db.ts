@@ -1,4 +1,5 @@
 import { Redis } from '@upstash/redis';
+import { aiAskLimitCount, aiAskLimitTime } from '../_config';
 
 // Initialize Redis
 const redis = new Redis({
@@ -7,17 +8,21 @@ const redis = new Redis({
 });
 
 
-export async function RegisterAIQueryRequest(ip: string, updateExpiryTime : number = 60 * 60 * 24) : Promise<number> {
+export async function RegisterAIQueryRequest(ip: string) : Promise<boolean> {
     //determine key
-    const key = `rate:${ip}`;
+    const key = `next-arcana:api:ask:${ip}`;
 
     // increment request count
     const count = await redis.incr(key);
 
+    //block if limit reached
+    if(count >= aiAskLimitCount)
+        return false;
+
     // set expiration only on first request
     if(count === 1)
-        await redis.expire(key, updateExpiryTime);
+        await redis.expire(key, aiAskLimitTime);
 
     //return result
-    return count;
+    return true;
 }
