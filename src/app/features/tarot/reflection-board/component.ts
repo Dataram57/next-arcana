@@ -15,6 +15,7 @@ export interface Deck {
 
 interface CardInstance {
     id : string;
+    cardId : string;
     name : string;
     src : string;
     x : number;
@@ -50,6 +51,7 @@ export class ReflectionBoard {
             ...cards,
             {
                 id: crypto.randomUUID(),
+                cardId: card.id,
                 name: card.name,
                 src: card.src,
                 x: 0,
@@ -108,12 +110,12 @@ export class ReflectionBoard {
             const isRotated = (card.rotation / 90) % 2 == 0;
             const cardWidth = Math.min(target.clientWidth, target.clientHeight) / 2;
             const cardHeight = Math.max(target.clientWidth, target.clientHeight) / 2;
-            console.log(cardWidth, cardHeight);
+            //console.log(cardWidth, cardHeight);
 
             card.x = this.snap(card.x + dx, (isRotated ? cardWidth : cardWidth));
             card.y = this.snap(card.y + dy, (isRotated ? cardHeight : cardHeight));
             card.shiftRotation = Math.random() * 4 - 2;
-            console.log(card);
+            //console.log(card);
 
             //enable transition
             target.style.transition = 'transform 250ms cubic-bezier(0.22, 1, 0.36, 1)';
@@ -156,9 +158,53 @@ export class ReflectionBoard {
         this.cards.update(cards => cards.filter(c => c.id !== card.id));
     }
 
-    toString(){
-        let txt : string = "";
-        return txt;
+    getFutureReading(){
+        return this.getReading(1);
+    }
+
+    private getCardIndexes(targetId : string) : {deckIndex : number, cardIndex : number}{
+        //for each deck
+        for (let deckIndex = 0; deckIndex < this.decks.length; deckIndex++) {
+            const deck = this.decks[deckIndex];
+            //for each card
+            for (let cardIndex = 0; cardIndex < deck.cards.length; cardIndex++) {
+                const card = deck.cards[cardIndex];
+                //check
+                if (card.id === targetId)
+                    return{
+                        deckIndex,
+                        cardIndex
+                    }
+            }
+        }
+        //missing
+        return{
+            deckIndex: -1,
+            cardIndex: -1
+        }
+    }
+
+    getReading(readingOffset = 0) : string{
+        let reading : string = "";
+        let cardName : string;
+        this.cards().forEach((card, index) => {
+            //get name
+            if(readingOffset){
+                const cardIndexes = this.getCardIndexes(card.cardId);
+                cardIndexes.cardIndex = (cardIndexes.cardIndex + readingOffset) % this.decks[cardIndexes.deckIndex].cards.length;
+                cardName = this.decks[cardIndexes.deckIndex].cards[cardIndexes.cardIndex].name;
+            }
+            else
+                //default
+                cardName = card.name;
+            
+            //write into reading
+            if(index != 0)
+                reading += "\n";
+            reading += `${cardName} at (${card.x}, ${card.y})`;
+        });
+
+        return reading;
     }
 
 }

@@ -86,7 +86,6 @@ export class App {
     clickSelectCard(cardIndex : number) {
         this.isCardSelectOpen = false;
         const card = this.selectedDeck?.cards?.[cardIndex];
-        console.log(card);
         this.reflectionBoard.addCard(card as Card);
         this.audioPlayer.play("CardSelect");
     }
@@ -101,8 +100,12 @@ export class App {
 
         //ask api
         try{
-            const response = await API_Ask("", "", (this.additionalContext.nativeElement as HTMLTextAreaElement).value);
-
+            const response = await API_Ask(
+                this.reflectionBoard.getReading(),
+                this.reflectionBoard.getFutureReading(),
+                (this.additionalContext.nativeElement as HTMLTextAreaElement).value
+            );
+            
             console.log(response);
             const html = DOMPurify.sanitize(await marked.parse(response));
             this.predictionHTML = this.sanitizer.bypassSecurityTrustHtml(html);

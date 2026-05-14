@@ -14,6 +14,7 @@
     "@types/node": "^25.6.2"
   },
   "dependencies": {
-    "@upstash/redis": "^1.38.0"
+    "@upstash/redis": "^1.38.0",
+    "zod": "^4.4.3"
   }
 }

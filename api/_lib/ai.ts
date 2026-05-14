@@ -26,3 +26,10 @@ export async function AI_Ask(prompt : string) : Promise<string>{
     const aiAnswer : string = data.candidates?.[0]?.content?.parts?.[0].text as string;
     return aiAnswer;
 }
+
+export function AI_escapeInput(input: string): string {
+    return input
+        .replace(/```/g, "\\`\\`\\`")
+        .replace(/<\|/g, "")
+        .replace(/\|>/g, "");
+}
