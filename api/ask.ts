@@ -45,6 +45,7 @@ export default async function handler(req: any, res: any) {
             GUIDELINES:
             - Interpret the readings symbolically and thoughtfully.
             - Use the relationship between the PRESENT and FUTURE readings to describe change or progression.
+                - Your response should have clear separate sections for PRESENT and FUTURE analysis.
             - Keep the response concise, meaningful, and natural.
             
             ADDITIONAL INFORMATIONS:
