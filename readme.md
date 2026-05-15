@@ -1,49 +1,79 @@
 # 🔮 Next Arcana
 
-Describe your situation with tarot cards and predict your future with a support of **AI**.
+Describe your situation using tarot cards and predict your future with the support of **AI**.
 
-App made in **Angular** with **Typescript** and **Vercel Serverless API**.
+An app built with **Angular**, **TypeScript**, and **Vercel Serverless Functions**.
 
-## Deployed demos
+## Deployed Demos
 
-- App: [next-arcana.vercel.app](https://next-arcana.vercel.app/)
-- API server: [next-arcana.vercel.app/api](https://next-arcana.vercel.app/api)
-- Database: NeonDB database
+- App: [https://next-arcana.vercel.app/](https://next-arcana.vercel.app/)
+- API Server: [https://next-arcana.vercel.app/api](https://next-arcana.vercel.app/api)
+- Redis Server: [upstash](https://upstash.com/)
 
 ## Requirements
 
-- ts
 - npm
-- Access to AI
+    - Angular CLI: `npm install -g @angular/cli`
+- Redis Server
+- AI API keys/access:
+    - [https://aistudio.google.com/](https://aistudio.google.com/)
 
-### AI APIs
+## AI APIs
 
-API keys are provided as secret environment variables *(set in `/.env` file for local running)*. 
+API keys are provided through environment variables *(configured in the `/.env` file for local development)*.
 
-- [Google AI Studio](https://aistudio.google.com/) - `GOOGLE_AI_STUDIO_API_KEY`
+* Google AI Studio — `GOOGLE_AI_STUDIO_API_KEY`
 
-There is also a `/.env.base` file that contains a list of all API keys that can be set.
+There is also a `/.env.base` file containing all supported environment variables.
 
-## Running
+## Running the Project
 
-### Terminal 1 - API:
+### Redis Instance
+
+`/flake.nix` already provides a specific Redis Server version. You can run it with:
+
+```sh
+redis-server
+```
+
+Alternatively, you can use your own Redis instance.
+
+### Environment Variables
+
+Configure environment variables in `/.env` using `/.env.base` as a template.
+
+Required configuration:
+
+- **Redis Server** connection details
+- **AI API** keys/access
+
+### API
+
 ```sh
 # Initialization
 cd api
 npm install
 cd ..
 
-# Please also configure environment variables in `/.env`
-
-# Vercel Serverless API
+# Start Vercel Serverless API locally
 npx vercel dev --listen 3000
 ```
 
-### Terminal 2 - App:
+### Main App
+
 ```sh
 # Initialization
 npm install
 
-# Angular Front-end
+# Start Angular frontend
 npm run start
 ```
+
+# TODO
+
+Main goals:
+
+- Improve GUI and UX ideas.
+- Implement support for more AI models.
+- Add a preview for the reflection board where all cards are "+1".
+
