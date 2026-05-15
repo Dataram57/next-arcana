@@ -29,7 +29,7 @@ interface CardInstance {
     standalone : true,
     imports : [CommonModule],
     templateUrl : './component.html',
-    styleUrls : ['./component.css']
+    styleUrls : ['./component.css', './responsives.css']
 })
 export class ReflectionBoard {
 
