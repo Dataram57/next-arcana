@@ -16,13 +16,13 @@ An app built with **Angular**, **TypeScript**, and **Vercel Serverless Functions
     - Angular CLI: `npm install -g @angular/cli`
 - Redis Server
 - AI API keys/access:
-    - [https://aistudio.google.com/](https://aistudio.google.com/)
+    - [Google AI Studio](https://aistudio.google.com/)
 
 ## AI APIs
 
 API keys are provided through environment variables *(configured in the `/.env` file for local development)*.
 
-* Google AI Studio — `GOOGLE_AI_STUDIO_API_KEY`
+- Google AI Studio — `GOOGLE_AI_STUDIO_API_KEY`
 
 There is also a `/.env.base` file containing all supported environment variables.
 
