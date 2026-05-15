@@ -21,10 +21,28 @@ export async function API_Ask(
         }),
     });
 
+    //check response status
     if (!res.ok) {
-        throw new Error(`API error: ${res.status} ${res.statusText}`);
+        let err : string = `API has failed to describe error.`;
+        try{
+            const obj = await res.json();
+            if(typeof obj.error == 'string')
+                err = obj.error;
+        }
+        catch(e){}
+        throw new Error(err);
     }
 
-    const data: AskResponse = await res.json();
-    return data.answer;
+    //check response format
+    try{
+        const data : AskResponse = await res.json();
+        if(typeof data.answer != 'string')
+            throw null;
+
+        //return
+        return data.answer;
+    }
+    catch(error){
+        throw new Error("API has failed to answer in proper format");
+    }
 }

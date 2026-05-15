@@ -99,21 +99,22 @@ export class App {
         this.cdr.detectChanges();
 
         //ask api
+        let html : string;
         try{
             const response = await API_Ask(
                 this.reflectionBoard.getReading(),
                 this.reflectionBoard.getFutureReading(),
                 (this.additionalContext.nativeElement as HTMLTextAreaElement).value
             );
-            
-            console.log(response);
-            const html = DOMPurify.sanitize(await marked.parse(response));
-            this.predictionHTML = this.sanitizer.bypassSecurityTrustHtml(html);
+            html = DOMPurify.sanitize(await marked.parse(response));
         }
         catch(err){
-            const html = DOMPurify.sanitize(await marked.parse(err as string));
-            this.predictionHTML = this.sanitizer.bypassSecurityTrustHtml(html);
+            console.log(err);
+            html = `<b>Error</b><br> ${DOMPurify.sanitize(await marked.parse((err as Error).message))}`;
         }
+
+        //pass html
+        this.predictionHTML = this.sanitizer.bypassSecurityTrustHtml(html);
 
         //force update
         this.cdr.detectChanges();
