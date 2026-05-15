@@ -1,5 +1,5 @@
 import { Redis } from '@upstash/redis';
-import { aiAskLimitCount, aiAskLimitTime } from '../_config';
+import { aiAskLimitCount, aiAskLimitTime } from '../_config.js';
 
 // Initialize Redis
 const redis = new Redis({
