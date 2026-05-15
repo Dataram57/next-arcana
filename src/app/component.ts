@@ -65,10 +65,11 @@ export class App {
         private sanitizer: DomSanitizer,
         private cdr: ChangeDetectorRef
     ){
-        this.audioPlayer.load("CardSwipe", 'sounds/oxidvideos-taking-playing-card-2-522516.mp3');
-        this.audioPlayer.load("CardSelect", 'sounds/oxidvideos-placing-playing-card-522514.mp3');
-        this.audioPlayer.load("CardPut", 'sounds/oxidvideos-placing-playing-card-522514.mp3');
-        this.audioPlayer.load("CardRoll", 'sounds/oxidvideos-taking-playing-card-2-522516.mp3');
+        this.audioPlayer.load("CardSwipe", 'sounds/swipe.mp3');
+        this.audioPlayer.load("CardSelect", 'sounds/select.mp3');
+        this.audioPlayer.load("CardPick", 'sounds/pick.mp3');
+        this.audioPlayer.load("CardPut", 'sounds/put.mp3');
+        this.audioPlayer.load("CardRoll", 'sounds/roll.mp3');
     }
 
 
