@@ -16,7 +16,7 @@ export interface TarotDeck {
     selector: 'deck',
     imports: [CommonModule],
     templateUrl: './component.html',
-    styleUrls: ['./component.css']
+    styleUrls: ['./component.css', './responsives.css']
 })
 export class Deck {
 

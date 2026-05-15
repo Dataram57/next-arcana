@@ -1,13 +1,17 @@
 <div class="container">
-    <div class="background-cards">
-        <img
-            *ngFor="let card of (deck?.cards | slice:1:7)?.reverse(); let i = index"
-            [src]="card?.src"
-            [alt]="card?.name"
+    <div class="container-cards">
+        <div class="background-cards">
+            <img
+                *ngFor="let card of (deck?.cards | slice:1:7)?.reverse(); let i = index"
+                [src]="card?.src"
+                [alt]="card?.name"
+                class="card-img"
+            >
+        </div>
+        <img class="cover-card"
+            [src]="deck?.cards?.[0]?.src"
+            class="card-img"
         >
     </div>
-    <img class="cover-card"
-        [src]="deck?.cards?.[0]?.src"
-    >
     <header>{{ deck?.name }}</header>
 </div>
