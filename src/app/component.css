@@ -11,6 +11,41 @@ const screen_sizes_names = ['xs', 'sm', 'md', 'lg', 'xl'];
 */
 
 /*################################################################
+Background
+*/
+
+.background {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: black;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+}
+
+/* VIGNETTE LAYER */
+.background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0) 40%,
+        rgba(0, 0, 0, 0.35) 70%,
+        rgba(0, 0, 0, 0.85) 100%
+    );
+}
+
+.background img{
+    width: 100%;
+}
+
+
+/*################################################################
 Popup Screen
 */
 
@@ -89,6 +124,17 @@ Prediction
     color: white;
     max-width: 768px;
     font-size: large;
+}
+
+.popup-screen-prediction  header:first-of-type{
+    text-align: center;
+    font-weight: bold;
+    font-size: xx-large;
+    border-bottom: 1px solid white;
+    width: 100%;
+    display: block;
+    margin-bottom: 1rem;
+
 }
 
 /*################################################################

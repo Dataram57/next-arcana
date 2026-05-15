@@ -1,4 +1,9 @@
 
+
+<div class="background">
+    <img src="images/background.png">
+</div>
+
 <popup-screen
     [visible]="isCardSelectOpen"
     title="Select Card"
@@ -126,6 +131,9 @@
             >
                 🔮 Predicting...
                 <marquee>✨</marquee>
+            </div>
+            <div *ngIf="predictionHTML">
+                <header>🧙 AI's Analysis</header>
             </div>
             <div *ngIf="predictionHTML" [innerHTML]="predictionHTML"></div>
         </div>

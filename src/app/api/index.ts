@@ -1,4 +1,4 @@
-import { apiURL } from "./config";
+import { apiURL } from "../config";
 
 interface AskResponse {
     answer: string;
